@@ -8,7 +8,7 @@ class UsersTests(TestCase):
   name='Antonio'
   birth_date=datetime(2005, 4, 5)
   
-  def teste_create_user(self):
+  def testCreateUser(self):
     UserModel = get_user_model()
     user = UserModel.objects.create_user(email=self.email, password=self.password, name=self.name, birth_date=self.birth_date)
     
@@ -21,7 +21,7 @@ class UsersTests(TestCase):
     self.assertFalse(user.is_staff)
     self.assertFalse(user.is_superuser)
     
-  def teste_create_superuser(self):
+  def testCreateSuperuser(self):
     UserModel = get_user_model()
     admin_user = UserModel.objects.create_superuser(email=self.email, password=self.password, name=self.name, birth_date=self.birth_date)
     
