@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     #APPS
     'accounts',
     'users',
+    'statments',
+    'investments'
 ]
 
 MIDDLEWARE = [
