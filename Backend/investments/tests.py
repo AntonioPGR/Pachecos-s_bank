@@ -1,6 +1,6 @@
 from django.test import TestCase
 from utils.create_test_user import createTestUser
-from investments.models import InvestmentModel
+from investments.models import Investment
 
 
 class InvestmentTest(TestCase):
@@ -8,7 +8,7 @@ class InvestmentTest(TestCase):
   
   def testCreateInvestment(self):
     owner = createTestUser()
-    investment = InvestmentModel.objects.create(owner=owner, value=self.value)
+    investment = Investment.objects.create(owner=owner, value=self.value)
     
     self.assertEqual(investment.owner, owner)
     self.assertEqual(investment.value, self.value)

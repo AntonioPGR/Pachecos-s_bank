@@ -1,8 +1,8 @@
 from rest_framework.serializers import ModelSerializer
-from statments.models import StatmentModel
+from statments.models import Statment
 
 
 class AccountSerializer(ModelSerializer):
   class Meta:
-    model = StatmentModel
+    model = Statment
     fields = '__all__'

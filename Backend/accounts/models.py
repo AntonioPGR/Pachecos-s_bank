@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator
 from django.conf import settings
 
 
-class AccountModel(models.Model):
+class Account(models.Model):
   owner = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False)
   balance = models.FloatField(
     validators=[MinValueValidator(0.0)],
@@ -11,4 +11,4 @@ class AccountModel(models.Model):
   )
   
   def __str__(self) -> str:
-    return self.owner
+    return self.owner.email

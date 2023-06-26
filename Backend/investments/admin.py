@@ -1,10 +1,10 @@
 from django.contrib import admin
-from investments.models import InvestmentModel
+from investments.models import Investment
 
 
 class InvestmentAdmin(admin.ModelAdmin):
-  model = InvestmentModel
+  model = Investment
   list_display = ('owner', 'value',)
   search_fields = ('owner__email',)
   
-admin.site.register(InvestmentModel, InvestmentAdmin)
+admin.site.register(Investment, InvestmentAdmin)

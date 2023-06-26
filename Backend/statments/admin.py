@@ -1,10 +1,10 @@
 from django.contrib import admin
-from statments.models import StatmentModel
+from statments.models import Statment
 
 
 class StatmentAdmin(admin.ModelAdmin):
-  model=StatmentModel
+  model=Statment
   list_display=('owner', 'value')
   search_fields=('owener__email',)
   
-admin.site.register(StatmentModel,StatmentAdmin)
+admin.site.register(Statment,StatmentAdmin)

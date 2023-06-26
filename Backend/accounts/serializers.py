@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from accounts.models import AccountModel
+from accounts.models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
   class Meta:
-    model=AccountModel
+    model=Account
     fields = ['id', 'owner', 'balance']

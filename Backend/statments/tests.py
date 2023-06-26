@@ -1,5 +1,5 @@
 from django.test import TestCase
-from statments.models import StatmentModel
+from statments.models import Statment
 from utils.create_test_user import createTestUser
 
 
@@ -9,7 +9,7 @@ class StatmentTests(TestCase):
   
   def testCreateStatment(self):
     owner = createTestUser()
-    newStatment = StatmentModel.objects.create(owner=owner,description=self.description, value=self.value)
+    newStatment = Statment.objects.create(owner=owner,description=self.description, value=self.value)
 
     self.assertEqual(newStatment.description, self.description)
     self.assertEqual(newStatment.value, self.value)

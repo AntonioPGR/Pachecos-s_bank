@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.models import AccountModel
+from accounts.models import Account
 from utils.create_test_user import createTestUser
 
 
@@ -8,7 +8,7 @@ class AccountTests(TestCase):
   
   def testCreateAccount(self):
     owner = createTestUser()
-    conta = AccountModel.objects.create(owner=owner, balance=self.balance)
+    conta = Account.objects.create(owner=owner, balance=self.balance)
     
     self.assertEqual(conta.owner, owner)
     self.assertEqual(conta.balance, self.balance)
