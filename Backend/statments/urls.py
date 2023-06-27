@@ -3,5 +3,5 @@ from statments import views
 
 
 urlpatterns = [
-  path('', views.statments_list)
+  path('', views.StatmentsView.as_view(), name='statments')
 ]
