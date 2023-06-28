@@ -1,20 +1,36 @@
 from statments.serializer import StatmentSerializer
 from statments.models import Statment
-from utils.json_response import json_response
-from rest_framework.views import APIView
+from rest_framework.views import Request
+from models.baseAPIView import BaseAPIView
       
 
-class StatmentsView(APIView):
-  def get(self, request):
+class StatmentsView(BaseAPIView):
+  def removeOwnerFromStatments(self, statments):
+    for element in statments:
+      element.pop('owner', None)
+    return statments
+  
+  def get(self, request:Request):
     try:
-      if request.user.is_anonymous:
-        return json_response("Não é possivel acessar o saldo sem estar logado")
       statments = Statment.objects.filter(owner=request.user) or []
       serializer_data = StatmentSerializer(statments, many=True).data
-      for element in serializer_data:
-        element.pop('owner', None)
+      return_data = self.removeOwnerFromStatments(serializer_data)
     except:
-      return json_response("Algum erro inesperado ocorreu ao tentar retornar seu saldo! [requests_handler/views -> AccountView.get]")
+      return self.http_responses.internal500("Algum erro inesperado ocorreu ao tentar retornar seu saldo!")
     else:
-      return json_response(serializer_data)
-    
+      return self.http_responses.ok200(return_data)
+  
+  def post(self, request:Request):
+    try:
+      serializer = StatmentSerializer(data={
+        "value": request.data["value"],
+        "owner": request.user,
+        "description": request.data["description"]  
+      })
+      if not serializer.is_valid():
+        raise ValueError
+      serializer.save()
+    except:
+      return self.http_responses.badrequest400("algo estava errado na requisição")
+    else:
+      return self.http_responses.created201(serializer.data)
