@@ -1,7 +1,7 @@
 from investments.models import Investment
 from investments.serializer import InvestmentSerializer
 from rest_framework.views import Request
-from models.baseAPIView import BaseAPIView
+from models.base_api_view import BaseAPIView
 
 class InvestmentsView(BaseAPIView):
   

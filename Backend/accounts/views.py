@@ -1,7 +1,7 @@
 from accounts.models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import Request
-from models.baseAPIView import BaseAPIView
+from models.base_api_view import BaseAPIView
 
 
 class AccountView(BaseAPIView):

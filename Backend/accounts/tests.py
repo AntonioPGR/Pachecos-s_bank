@@ -1,13 +1,13 @@
 from django.test import TestCase
 from accounts.models import Account
-from utils.create_test_user import createTestUser
+from models.test_setup import TestSetUp
 
 
-class AccountTests(TestCase):
+class AccountTests(TestSetUp):
   balance = 1000
   
   def testCreateAccount(self):
-    owner = createTestUser()
+    owner = self.createTestUser()
     conta = Account.objects.create(owner=owner, balance=self.balance)
     
     self.assertEqual(conta.owner, owner)

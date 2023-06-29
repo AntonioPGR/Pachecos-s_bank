@@ -1,13 +1,12 @@
-from django.test import TestCase
-from utils.create_test_user import createTestUser
 from investments.models import Investment
+from models.test_setup import TestSetUp
 
 
-class InvestmentTest(TestCase):
+class InvestmentTest(TestSetUp):
   value = 30
   
   def testCreateInvestment(self):
-    owner = createTestUser()
+    owner = self.createTestUser()
     investment = Investment.objects.create(owner=owner, value=self.value)
     
     self.assertEqual(investment.owner, owner)
