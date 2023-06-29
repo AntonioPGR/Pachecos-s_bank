@@ -9,9 +9,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
   email = models.EmailField(translate('Email adress'), unique=True, primary_key=True, blank=False, null=False)
   name = models.CharField(translate('name'), max_length=20, blank=False, null=False)
   birth_date = models.DateField(translate('Birth Date'), blank=False, null=False)
+  password = models.CharField(max_length=40,blank=False, null=False)
   is_staff = models.BooleanField(default=False)
   is_active = models.BooleanField(default=True)
-  date_joined = models.DateTimeField(default=timezone.now)
+  date_joined = models.DateTimeField(default=timezone.now, null=True, blank=True)
   
   USERNAME_FIELD = 'email'
   REQUIRED_FIELDS = ['name', 'birth_date']

@@ -6,9 +6,18 @@ from django.test import TestCase
 
 
 class TestSetUp(TestCase):
+  def getTestUserCredentials(self):
+    return {
+      "email": 'usuario_de_teste@gmail.com',
+      "password": '123',
+      "name": "Antonio",
+      "birth_date": datetime(2001, 4, 5)
+    }
+  
   def createTestUser(self):
     UserModel = get_user_model()
-    return UserModel.objects.create_user(email='usuario_de_teste@gmail.com', password="123", name="Antonio", birth_date=datetime(2001, 4, 5))
+    user_credentials = self.getTestUserCredentials()
+    return UserModel.objects.create_user(email=user_credentials['email'], password=user_credentials['password'], name=user_credentials['name'], birth_date=user_credentials['birth_date'])
 
 class TestAPISetUp(APITestCase, TestSetUp):
   
