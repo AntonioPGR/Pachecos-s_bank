@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 from models.base_api_view import BaseAPIView
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
-from users.models import CustomUser
+from accounts.models import Account
 from users.serializers import UserSerializer
 
 
@@ -28,7 +28,11 @@ class UserRegisterView(BaseAPIView):
   
   def post(self, request:Request):
     try:
-      CustomUser.objects.create(name=request.data["name"], email=request.data["email"], password=request.data["password"], birth_date=request.data["birth_date"])
+      serializer = UserSerializer(data=request.data)
+      if not serializer.is_valid():
+        raise ValueError
+      UserModel = get_user_model()
+      UserModel.objects.create_user(email=request.data['email'], password=request.data['password'], name=request.data['name'], birth_date=request.data['birth_date'])
     except Exception as e:
       return self.http_responses.badrequest400({"msg": e.args})
     else:

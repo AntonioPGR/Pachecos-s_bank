@@ -1,4 +1,3 @@
-from django.test import TestCase
 from accounts.models import Account
 from models.test_setup import TestSetUp
 
@@ -6,9 +5,7 @@ from models.test_setup import TestSetUp
 class AccountTests(TestSetUp):
   balance = 1000
   
-  def testCreateAccount(self):
+  def test_expect_account_to_be_created_with_user(self):
     owner = self.createTestUser()
-    conta = Account.objects.create(owner=owner, balance=self.balance)
-    
-    self.assertEqual(conta.owner, owner)
-    self.assertEqual(conta.balance, self.balance)
+    account = Account.objects.get(owner=owner)
+    self.assertEqual(account.owner, owner)

@@ -14,12 +14,27 @@ class TestSetUp(TestCase):
       "birth_date": datetime(2001, 4, 5)
     }
   
-  def createTestUser(self):
+  def createTestUser(self, balance=0):
     UserModel = get_user_model()
     user_credentials = self.getTestUserCredentials()
-    return UserModel.objects.create_user(email=user_credentials['email'], password=user_credentials['password'], name=user_credentials['name'], birth_date=user_credentials['birth_date'])
+    user = UserModel.objects.create_user(email=user_credentials['email'], password=user_credentials['password'], name=user_credentials['name'], birth_date=user_credentials['birth_date'])
+    return user
 
 class TestAPISetUp(APITestCase, TestSetUp):
+  
+  def login(self, email, password):
+    res = self.client.post(self.urls['login'], {
+      "email": email,
+      "password": password
+    })
+    try:
+      return res.json()['token']
+    except:
+      raise ValueError("Não foi possivel fazer login! verifique as credenciais de acesso")
+  
+  def getTestUserLoginToken(self):
+    credentials = self.getTestUserCredentials()
+    return self.login(credentials['email'], credentials['password'])
   
   def setUp(self):
     self.urls = {

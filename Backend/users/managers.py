@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as translate
+from accounts.models import Account
 # TYPES
 from datetime import datetime
 
@@ -19,6 +20,7 @@ class CustomUserManager(BaseUserManager):
     user = self.model(email=email, birth_date=birth_date, name=name, **extra_fields)
     user.set_password(password)
     user.save()
+    Account.objects.create(owner=user, balance=0)
     return user
   
   def create_superuser(self, email:str, password:str, name:str, birth_date:datetime, **extra_fields):

@@ -15,8 +15,7 @@ class TestLoginView(TestAPISetUp):
     })
     self.assertEqual(res.status_code, 200)
     
-    res_data = res.json()
-    token = res_data['token']
+    token = res.json()['token']
     self.assertIsNotNone(token)
     self.assertEqual(token, Token.objects.get_or_create(user=test_user)[0].key)
 
@@ -38,10 +37,10 @@ class TestRegisterView(TestAPISetUp):
       'name': self.test_name,
       "birth_date": self.test_birth_date
     })
-    print(res.json())
     self.assertEqual(res.status_code, 201)
     
-    user_exists = CustomUser.objects.filter(email=self.test_email).exists()
+    user = CustomUser.objects.filter(email=self.test_email)
+    user_exists = user.exists()
     self.assertTrue(user_exists)
   
   def test_user_can_register_without_data(self):
