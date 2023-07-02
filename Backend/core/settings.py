@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     #LIBS
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_yasg',
     #APPS
     'accounts',
     'users',
