@@ -2,6 +2,9 @@ from investments.models import Investment
 from investments.serializer import InvestmentSerializer
 from rest_framework.views import Request
 from models.base_api_view import BaseAPIView
+from accounts.actions import AccountActions
+from models.errors import InsufficientBalance, InvalidWithraw
+
 
 class InvestmentsView(BaseAPIView):
   
@@ -21,7 +24,7 @@ class InvestmentsView(BaseAPIView):
       serializer_data = InvestmentSerializer(investments, many=True).data
       values = self.getTotalInvestmentsValue(serializer_data)
     except:
-      return self.http_responses.internal500("Algum erro inesperado ocorreu ao tentar retornar seu saldo!")
+      return self.http_responses.internal500("Algum erro inesperado ocorreu ao tentar retornar seu saldo de investimento!")
     else:
       return self.http_responses.ok200(values)
   
@@ -32,9 +35,15 @@ class InvestmentsView(BaseAPIView):
         "owner": request.user
       })
       if not serializer.is_valid():
-        raise ValueError
+        raise ValueError(["Certifique-se que os valores passados estão corretos", serializer.error_messages])
+      account_actions = AccountActions(serializer.validated_data['owner'])
+      account_actions.addToAccountValue(-float(serializer.validated_data['value']))
       serializer.save()
-    except:
-      return self.http_responses.badrequest400("Algo estava errado na requisição")
+    except ValueError as e:
+      return self.http_responses.badRequest400(e.args)
+    except InvalidWithraw as e:
+      return self.http_responses.paymentRequired402("O valor do investimento não pode ser 0 ou negativo!")
+    except InsufficientBalance as e:
+      return self.http_responses.paymentRequired402("O saldo é insuficiente para o valor de investimento desejado!")
     else:
       return self.http_responses.created201(serializer.data)

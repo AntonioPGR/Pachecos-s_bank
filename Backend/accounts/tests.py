@@ -6,6 +6,6 @@ class AccountTests(TestSetUp):
   balance = 1000
   
   def test_expect_account_to_be_created_with_user(self):
-    owner = self.createTestUser()
+    owner=self.default_user.user
     account = Account.objects.get(owner=owner)
     self.assertEqual(account.owner, owner)

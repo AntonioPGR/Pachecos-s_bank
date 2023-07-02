@@ -18,9 +18,13 @@ class HttpResponses:
     return HttpResponses.toRespond(data, 403)
 
   @staticmethod
-  def badrequest400(data:dict):
+  def badRequest400(data:dict):
     return HttpResponses.toRespond(data, 400)
 
   @staticmethod
   def created201(data:dict):
     return HttpResponses.toRespond(data, 201)
+  
+  @staticmethod
+  def paymentRequired402(data:dict):
+    return HttpResponses.toRespond(data, 402)

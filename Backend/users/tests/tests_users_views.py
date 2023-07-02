@@ -1,17 +1,16 @@
-from models.test_setup import TestAPISetUp
+from models.test_setup import TestSetUp
 from users.models import CustomUser
 from rest_framework.authtoken.models import Token
 from datetime import datetime
 
 
-class TestLoginView(TestAPISetUp):
+class TestLoginView(TestSetUp):
   
   def test_user_can_login(self):
-    test_user = self.createTestUser()
-    user_credentials = self.getTestUserCredentials()
+    test_user = self.default_user.user
     res = self.client.post(self.urls['login'], {
-      "email": user_credentials['email'],
-      "password": user_credentials['password']
+      "email": self.default_user.email,
+      "password": self.default_user.password
     })
     self.assertEqual(res.status_code, 200)
     
@@ -24,7 +23,7 @@ class TestLoginView(TestAPISetUp):
     self.assertEqual(res.status_code, 400)
     
     
-class TestRegisterView(TestAPISetUp):
+class TestRegisterView(TestSetUp):
   test_email = "teste@gmail.com"
   test_name = "nome de teste"
   test_password = "123"

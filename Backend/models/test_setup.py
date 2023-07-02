@@ -1,28 +1,12 @@
 from rest_framework.test import APITestCase
 from django.urls import reverse
-from django.contrib.auth import get_user_model
-from datetime import datetime
-from django.test import TestCase
+from models.dotdict import Dotdict
+from models.test_user import TestUser
 
 
-class TestSetUp(TestCase):
-  def getTestUserCredentials(self):
-    return {
-      "email": 'usuario_de_teste@gmail.com',
-      "password": '123',
-      "name": "Antonio",
-      "birth_date": datetime(2001, 4, 5)
-    }
+class TestSetUp(APITestCase):
   
-  def createTestUser(self, balance=0):
-    UserModel = get_user_model()
-    user_credentials = self.getTestUserCredentials()
-    user = UserModel.objects.create_user(email=user_credentials['email'], password=user_credentials['password'], name=user_credentials['name'], birth_date=user_credentials['birth_date'])
-    return user
-
-class TestAPISetUp(APITestCase, TestSetUp):
-  
-  def login(self, email, password):
+  def getLoginToken(self, email, password):
     res = self.client.post(self.urls['login'], {
       "email": email,
       "password": password
@@ -32,16 +16,32 @@ class TestAPISetUp(APITestCase, TestSetUp):
     except:
       raise ValueError("Não foi possivel fazer login! verifique as credenciais de acesso")
   
-  def getTestUserLoginToken(self):
-    credentials = self.getTestUserCredentials()
-    return self.login(credentials['email'], credentials['password'])
-  
   def setUp(self):
-    self.urls = {
+    urls = {
       'accounts': reverse('accounts'),
       'login': reverse('login'),
       'register': reverse('register'),
       'statments': reverse('statments'),
       'investments': reverse('investments'),
     }
+    self.urls = Dotdict(urls)
+    http_status = {
+      'created': 201,
+      'ok': 200,
+      'no_content': 204,
+      'bad_request': 400,
+      'payment_required': 402,
+      'unauthorized': 401,
+      'forbidden': 403,
+      'not_found': 404,
+      'conflict': 409,
+      'internal_server_error': 500,
+    }
+    self.http_status = Dotdict(http_status)
+    self.default_user = TestUser(
+      name='Usuário de teste',
+      email='email_do_usuario_de_teste@gmail.com',
+      password='050406Ant+',
+      birth_date='2005-04-05'
+    )
     return super().setUp()

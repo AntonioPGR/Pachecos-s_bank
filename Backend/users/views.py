@@ -19,7 +19,7 @@ class UserLoginView(BaseAPIView):
         raise ValueError("Dados incorretos! verifique o email e senha digitada e tente novamente!")
       token = Token.objects.get_or_create(user=user)[0].key
     except Exception as e:
-      return self.http_responses.badrequest400({"msg": e.args})
+      return self.http_responses.badRequest400({"msg": e.args})
     else:
       return self.http_responses.ok200({"token":token})
 
@@ -34,6 +34,6 @@ class UserRegisterView(BaseAPIView):
       UserModel = get_user_model()
       UserModel.objects.create_user(email=request.data['email'], password=request.data['password'], name=request.data['name'], birth_date=request.data['birth_date'])
     except Exception as e:
-      return self.http_responses.badrequest400({"msg": e.args})
+      return self.http_responses.badRequest400({"msg": e.args})
     else:
       return self.http_responses.created201("")

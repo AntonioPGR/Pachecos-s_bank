@@ -7,7 +7,7 @@ class StatmentModelTests(TestSetUp):
   value = 1000.0
   
   def testCreateStatment(self):
-    owner = self.createTestUser()
+    owner = self.default_user.user
     newStatment = Statment.objects.create(owner=owner, description=self.description, value=self.value)
 
     self.assertEqual(newStatment.description, self.description)

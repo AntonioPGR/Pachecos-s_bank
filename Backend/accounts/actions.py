@@ -1,6 +1,7 @@
 from rest_framework.serializers import ValidationError
 from accounts.models import Account
 from accounts.serializers import AccountSerializer
+from models.errors import InvalidWithraw, InsufficientBalance
 
 
 class AccountActions:
@@ -12,9 +13,9 @@ class AccountActions:
     except:
       raise ValueError("Não foi possivel achar uma conta pertencente a este usuário!")
       
-  def addToAccountValue(self, value:int):
+  def addToAccountValue(self, value:float):
     if not self.haveEnoughBalance(value):
-      raise ValueError("Saldo insuficiente! O valor do resgate é maior que o saldo em conta")
+      raise InsufficientBalance("Saldo insuficiente! O valor do resgate é maior que o saldo em conta")
     self.saveBalanceUpdate(value)
     
   def haveEnoughBalance(self, value):
@@ -28,8 +29,8 @@ class AccountActions:
       'owner': self.owner
     })
     if not serializer.is_valid():
-      raise ValidationError("Erro ao mudar o valor da conta! O Serializador de mudança não é valido")
+      raise InvalidWithraw("Erro ao mudar o valor da conta! O Serializador de mudança não é valido")
     serializer.save()
     
-  def balance(self):
+  def getBalance(self):
     return self.account.balance

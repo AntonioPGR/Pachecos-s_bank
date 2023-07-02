@@ -1,10 +1,10 @@
 from statments.serializer import StatmentSerializer
 from statments.models import Statment
-from rest_framework.serializers import ValidationError
 from rest_framework.views import Request
 from models.base_api_view import BaseAPIView
 from django.core.exceptions import ObjectDoesNotExist
 from accounts.actions import AccountActions
+from models.errors import InvalidWithraw, InsufficientBalance
 
 
 class StatmentsView(BaseAPIView):
@@ -41,13 +41,13 @@ class StatmentsView(BaseAPIView):
       accountHandler.addToAccountValue(serializer.validated_data['value'])
       serializer.save()
     except ValueError as error:
-      return self.http_responses.badrequest400({
+      return self.http_responses.badRequest400({
         'error': error.args
       })
-    except ValidationError as error:
-      return self.http_responses.internal500({
-        'error': error.args
-      })
+    except InvalidWithraw as error:
+      return self.http_responses.paymentRequired402("O valor de extração ou depósito é invalido")
+    except InsufficientBalance as error:
+      return self.http_responses.paymentRequired402("Saldo indisponivel")
     else:
       return self.http_responses.created201(serializer.data)
   
