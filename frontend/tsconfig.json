@@ -22,7 +22,8 @@
     "noUnusedParameters": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "rootDir": "src/"
+    "rootDir": "src/",
+    "baseUrl": "./src/"
   },
   "include": [
     "src"

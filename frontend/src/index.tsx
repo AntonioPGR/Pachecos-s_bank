@@ -1,15 +1,20 @@
+// COMPONENTS
+import { AppRouter } from 'app_routes';
+// REACT
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// ROUTER
+import { BrowserRouter } from 'react-router-dom';
+// STYLES
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <h1> Ola </h1>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   </React.StrictMode>
 );
-
-reportWebVitals();
