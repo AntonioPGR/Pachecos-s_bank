@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 // ROUTER
 import { BrowserRouter } from 'react-router-dom';
 // STYLES
-import './index.css';
+import 'styles/tailwind_config.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

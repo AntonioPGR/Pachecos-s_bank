@@ -7,13 +7,13 @@ import { Route, Routes } from 'react-router-dom';
 
 export const AppRouter = () => {
   return (
-    <>
+    <div className='grid grid-cols-[auto_1fr]'>
       <SideBar />
-      <div>
+      <section>
         <Routes>
           <Route path='/' element={<HomePage />} />
         </Routes>
-      </div>
-    </>
+      </section>
+    </div>
   );
 };
