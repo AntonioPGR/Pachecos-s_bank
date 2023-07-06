@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 
 export const AppRouter = () => {
   return (
-    <div className='grid grid-cols-[auto_1fr]'>
+    <div className='bg-gray-200 dark:bg-gray-800 grid grid-cols-[auto_1fr]'>
       <SideBar />
       <section>
         <Routes>
