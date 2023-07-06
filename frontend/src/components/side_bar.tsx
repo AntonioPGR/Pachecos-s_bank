@@ -31,8 +31,8 @@ export const SideBar = () => {
   };
 
   return (
-    <nav className='flex flex-col gap-8 group p-4 bg-blue-950 h-screen w-fit'>
-      <ul className='flex flex-col gap-2'>
+    <nav className='flex flex-col gap-8 group p-2 md:p-4 bg-blue-950 h-screen w-fit'>
+      <ul className='flex flex-col gap-4'>
         <Link to={'/'}>
           <img
             src={Logo}
@@ -52,7 +52,7 @@ export const SideBar = () => {
           <Link key={value.id} to={value.to} className='hover:drop-shadow-lg'>
             <li className='flex items-center justify-center gap-2 cursor-pointer'>
               <value.icon className='w-12 text-rosa-100' />
-              <span className='hidden group-hover:block font-default text-rosa-100 text-2xl uppercase'>
+              <span className='hidden lg:group-hover:block font-default text-rosa-100 text-2xl uppercase'>
                 {value.label}
               </span>
             </li>

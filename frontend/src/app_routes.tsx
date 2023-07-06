@@ -2,6 +2,8 @@
 import { SideBar } from 'components/side_bar';
 // PAGES
 import { HomePage } from 'pages/home_page';
+import { LoginPage } from 'pages/login_page';
+import { RegisterPage } from 'pages/register_page';
 // ROUTER
 import { Route, Routes } from 'react-router-dom';
 
@@ -12,6 +14,8 @@ export const AppRouter = () => {
       <section>
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/cadastro' element={<RegisterPage />} />
         </Routes>
       </section>
     </div>

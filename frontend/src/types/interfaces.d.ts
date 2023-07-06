@@ -1,7 +1,10 @@
-declare interface IMenuLink{
+declare interface ILink{
   id: number,
   to: string,
   label: string,
+}
+
+declare interface IMenuLink extends ILink{
   icon: React.ForwardRefExoticComponent
 }
 
@@ -11,5 +14,5 @@ declare interface IInputInfo{
   label: string,
   placeholder?: string,
   id: number,
-  onChange: () => void
+  onChange(value:any): void
 }

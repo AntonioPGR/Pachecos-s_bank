@@ -1,6 +1,6 @@
 interface ButtonProps {
   children: TChildren;
-  onClick: () => void;
+  onClick?: () => void;
 }
 export const Button = ({ children, onClick }: ButtonProps) => {
   return (
