@@ -1,7 +1,9 @@
 // COMPONENTS
 import { SideBar } from 'components/side_bar';
 // PAGES
+import { AccountPage } from 'pages/account_page';
 import { HomePage } from 'pages/home_page';
+import { InvestmentsPage } from 'pages/investments_page';
 import { LoginPage } from 'pages/login_page';
 import { RegisterPage } from 'pages/register_page';
 // ROUTER
@@ -16,6 +18,8 @@ export const AppRouter = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/cadastro' element={<RegisterPage />} />
+          <Route path='/conta' element={<AccountPage />} />
+          <Route path='/investimentos' element={<InvestmentsPage/>} />
         </Routes>
       </section>
     </div>

@@ -31,7 +31,7 @@ export const SideBar = () => {
   };
 
   return (
-    <nav className='flex flex-col gap-8 group p-2 md:p-4 bg-blue-950 h-screen w-fit'>
+    <nav className='flex flex-col gap-8 group p-2 md:p-4 bg-azul-900 h-screen w-fit'>
       <ul className='flex flex-col gap-4'>
         <Link to={'/'}>
           <img
