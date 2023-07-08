@@ -34,7 +34,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <main className='flex items-center justify-center min-h-screen p-4'>
+    <main className='page_main flex items-center justify-center'>
       <Form
         title='Login'
         button_label='entrar'

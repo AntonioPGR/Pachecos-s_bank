@@ -5,10 +5,12 @@ import { useState } from 'react';
 export const InvestmentsPage = () => {
   const [investment_value, setInvestmentValue] = useState(0);
 
-  const handleInvest = () => {};
+  const handleInvest = () => {
+    return;
+  };
 
   return (
-    <main className='grid grid-cols-1 grid-rows-2 min-h-screen p-8 gap-4 max-w-screen-xl m-auto font-default text-cinza-100'>
+    <main className='page_main grid grid-cols-1 grid-rows-2 gap-4'>
       <InvestedValue className='row-start-1 row-end-2' />
       <ActionCard
         input_value={investment_value}

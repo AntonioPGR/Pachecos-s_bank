@@ -8,12 +8,16 @@ export const AccountPage = () => {
   const [deposit_value, setDepositValue] = useState(0);
   const [statement_value, setWithdrawValue] = useState(0);
 
-  const handleDeposit = () => {};
+  const handleDeposit = () => {
+    return;
+  };
 
-  const handleWithdraw = () => {};
+  const handleWithdraw = () => {
+    return;
+  };
 
   return (
-    <main className='grid grid-cols-3 grid-rows-2 min-h-screen p-8 gap-4 max-w-screen-xl m-auto font-default text-cinza-100'>
+    <main className='page_main grid grid-cols-3 grid-rows-2 gap-4'>
       <Balance className='col-start-1 col-end-3 row-start-1 row-end-1' />
       <ActionCard
         title='Depositar'

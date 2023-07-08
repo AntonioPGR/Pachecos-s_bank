@@ -30,7 +30,7 @@ export const Form = ({
               <div key={inputInfo.id}>
                 <label
                   htmlFor={inputInfo.label}
-                  className='font-default text-rosa-100 dark:text-cinza-100 lowercase'
+                  className='font-default text-rosa-100 lowercase'
                 >
                   {inputInfo.label}
                 </label>

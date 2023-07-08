@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.page_button{
+  @apply uppercase text-rosa-100 bg-transparent border-2 py-2 px-4 border-solid border-rosa-100 rounded-2xl font-default text-2xl hover:bg-rosa-100 hover:text-cinza-100 duration-300
+}
+
+.page_text{
+  @apply dark:text-cinza-100 text-cinza-900 font-default
+}
+
+.page_card{
+  @apply rounded-2xl p-4 page_text
+}
+
+.page_main{
+  @apply m-auto min-h-screen p-8 max-w-screen-xl page_text
+}
