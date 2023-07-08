@@ -2,12 +2,13 @@ import { Button } from './button';
 import { Card } from './card';
 import { MoneyInput } from './money_input';
 
-interface ActionCard {
+interface ActionCardProps {
   className?: string;
   title: string;
   button_text: string;
   input_value: number;
   onChangeValue(n: number): void;
+  onSubmit: () => void;
 }
 export const ActionCard = ({
   className,
@@ -15,7 +16,8 @@ export const ActionCard = ({
   button_text,
   input_value,
   onChangeValue,
-}: ActionCard) => {
+  onSubmit,
+}: ActionCardProps) => {
   return (
     <Card
       className={
@@ -24,7 +26,7 @@ export const ActionCard = ({
     >
       <h2 className='text-4xl'> {title} </h2>
       <MoneyInput onChange={onChangeValue} value={input_value} />
-      <Button> {button_text} </Button>
+      <Button onClick={onSubmit}> {button_text} </Button>
     </Card>
   );
 };
