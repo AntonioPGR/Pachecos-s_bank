@@ -1,5 +1,5 @@
 import { Button } from 'components/button';
-import ImagemHero from 'images/Imagem Hero.svg';
+import ImagemHero from 'images/imagem_hero.svg';
 import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {

@@ -40,7 +40,7 @@ export const Form = ({
                   onChange={value => inputInfo.onChange(value.target.value)}
                   placeholder={inputInfo.placeholder}
                   name={inputInfo.label}
-                  className='block w-full px-4 py-2 rounded-2xl text-cinza-100 dark:text-cinza-900 bg-rosa-100 dark:bg-pink-200 outline-none'
+                  className='block w-full px-4 py-2 rounded-2xl text-cinza-100 dark:text-cinza-900 bg-rosa-100 dark:bg-cinza-100 outline-none'
                 />
               </div>
             );

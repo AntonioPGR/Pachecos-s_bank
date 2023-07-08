@@ -19,9 +19,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noUnusedParameters": true,
+    // "noUnusedParameters": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "rootDir": "src/",
     "baseUrl": "./src/"
   },
