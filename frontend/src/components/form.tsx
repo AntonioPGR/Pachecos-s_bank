@@ -47,11 +47,11 @@ export const Form = ({
           })}
         </section>
         {message_link && (
-          <p className='mb-12 text-center underline text-rosa-100 font-default text-sm'>
+          <p className='page_redirect_link'>
             <Link to={message_link.to}>{message_link.label}</Link>
           </p>
         )}
-        <Button>{button_label}</Button>
+        <Button testId='form_button'>{button_label}</Button>
       </form>
     </section>
   );

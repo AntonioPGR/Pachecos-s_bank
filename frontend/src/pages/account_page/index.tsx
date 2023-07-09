@@ -17,7 +17,10 @@ export const AccountPage = () => {
   };
 
   return (
-    <main className='page_main grid grid-cols-3 grid-rows-2 gap-4'>
+    <main
+      data-testid='accountPage'
+      className='page_main grid grid-cols-3 grid-rows-2 gap-4'
+    >
       <Balance className='col-start-1 col-end-3 row-start-1 row-end-1' />
       <ActionCard
         title='Depositar'

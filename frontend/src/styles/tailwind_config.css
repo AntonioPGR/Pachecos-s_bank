@@ -15,5 +15,9 @@
 }
 
 .page_main{
-  @apply m-auto min-h-screen p-8 max-w-screen-xl page_text
+  @apply m-auto min-h-screen p-4 max-w-screen-xl w-full page_text
+}
+
+.page_redirect_link{
+  @apply mb-12 text-center underline text-rosa-100 font-default text-sm
 }

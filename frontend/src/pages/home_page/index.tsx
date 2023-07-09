@@ -6,7 +6,10 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <main className='page_main flex gap-12 justify-around items-center'>
+    <main
+      data-testid='homePage'
+      className='page_main flex gap-12 justify-around items-center'
+    >
       <article className='max-w-2xl flex flex-col gap-2 items-start content-start'>
         <h1 className='font-highlight text-rosa-100 text-5xl'>
           Pacheco&apos;s Bank
@@ -20,7 +23,10 @@ export const HomePage = () => {
           Esqueça dos bancos tradicionais e experimente a autonomia financeira.
           Venha conhecer o nosso banco digital hoje mesmo!
         </p>
-        <Button onClick={() => navigate('/cadastro')}>
+        <Button
+          onClick={() => navigate('/cadastro')}
+          testId='goToRegisterButton'
+        >
           Crie sua conta agora!
         </Button>
       </article>

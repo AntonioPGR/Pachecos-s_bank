@@ -10,7 +10,10 @@ export const InvestmentsPage = () => {
   };
 
   return (
-    <main className='page_main grid grid-cols-1 grid-rows-2 gap-4'>
+    <main
+      data-testid='investmentsPage'
+      className='page_main grid grid-cols-1 grid-rows-2 gap-4'
+    >
       <InvestedValue className='row-start-1 row-end-2' />
       <ActionCard
         input_value={investment_value}

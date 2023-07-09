@@ -56,7 +56,10 @@ export const RegisterPage = () => {
   };
 
   return (
-    <main className='page_main flex items-center justify-center'>
+    <main
+      data-testid='registerPage'
+      className='page_main flex items-center justify-center'
+    >
       <Form
         title='cadastro'
         button_label='Cadastrar'

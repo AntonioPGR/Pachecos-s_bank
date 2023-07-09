@@ -1,5 +1,5 @@
 // COMPONENTS
-import { AppRouter } from 'app_routes';
+import { AppRouter } from 'routes';
 // REACT
 import React from 'react';
 import ReactDOM from 'react-dom/client';

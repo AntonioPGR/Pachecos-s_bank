@@ -34,7 +34,10 @@ export const LoginPage = () => {
   };
 
   return (
-    <main className='page_main flex items-center justify-center'>
+    <main
+      data-testid='loginPage'
+      className='page_main flex items-center justify-center'
+    >
       <Form
         title='Login'
         button_label='entrar'
