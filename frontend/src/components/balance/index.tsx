@@ -1,4 +1,4 @@
-import { Card } from './card';
+import { Card } from '../card';
 import BalanceImage from 'images/balance_image.svg';
 
 interface BalanceProps {

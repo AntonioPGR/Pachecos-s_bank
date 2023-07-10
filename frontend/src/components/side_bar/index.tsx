@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// ASSETS
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import Logo from 'images/logo.svg';
+// DATA
 import {
   not_logged_in_menu_links,
   logged_in_menu_links,
 } from 'data/menu_links';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
-import Logo from 'images/logo.svg';
+// REACT
+import { useEffect } from 'react';
+// RECOIL
+import { useRecoilValue } from 'recoil';
+// ROUTER
+import { Link } from 'react-router-dom';
+import { state_is_logged_in } from 'recoil/state_is_logged_in';
 
 export const SideBar = () => {
-  const [is_logged_in] = useState(false);
+  const is_logged_in = useRecoilValue(state_is_logged_in);
   const is_dark_mode_default = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches;
@@ -24,7 +31,7 @@ export const SideBar = () => {
 
   useEffect(() => {
     is_dark_mode_default && pageClasses.add('dark');
-  });
+  }, []);
 
   const togglePageTheme = () => {
     pageClasses.toggle('dark');
@@ -32,7 +39,7 @@ export const SideBar = () => {
 
   return (
     <nav className='fixed flex flex-col gap-8 group p-2 md:p-4 bg-azul-900 h-screen w-fit'>
-      <ul className='flex flex-col gap-4'>
+      <ul className='flex flex-col items-start gap-4'>
         <Link to={'/'}>
           <img
             src={Logo}
@@ -50,7 +57,10 @@ export const SideBar = () => {
         />
         {getLinksToDisplay().map(value => (
           <Link key={value.id} to={value.to} className='hover:drop-shadow-lg'>
-            <li className='flex items-center justify-center gap-2 cursor-pointer'>
+            <li
+              data-testid='menu_link'
+              className='flex items-center justify-center gap-2 cursor-pointer'
+            >
               <value.icon className='w-12 text-rosa-100' />
               <span className='hidden lg:group-hover:block font-default text-rosa-100 text-2xl uppercase'>
                 {value.label}

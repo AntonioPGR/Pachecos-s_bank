@@ -1,11 +1,11 @@
 interface ButtonProps {
   children: TChildren;
   onClick?: () => void;
-  testId?: string;
+  data_testid?: string;
 }
-export const Button = ({ children, onClick, testId }: ButtonProps) => {
+export const Button = ({ children, onClick, data_testid }: ButtonProps) => {
   return (
-    <button data-testid={testId} onClick={onClick} className='page_button'>
+    <button data-testid={data_testid} onClick={onClick} className='page_button'>
       {' '}
       {children}{' '}
     </button>

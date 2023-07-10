@@ -3,8 +3,13 @@ import { useState } from 'react';
 interface MoneyInputProps {
   value: number;
   onChange(n: number): void;
+  data_testid: string;
 }
-export const MoneyInput = ({ value, onChange }: MoneyInputProps) => {
+export const MoneyInput = ({
+  value,
+  onChange,
+  data_testid,
+}: MoneyInputProps) => {
   const formatNumber = (value: number) => {
     const splited_value = turnValueStringIntoArray(String(value));
     const formated_value = formatStringArray(splited_value);
@@ -66,6 +71,7 @@ export const MoneyInput = ({ value, onChange }: MoneyInputProps) => {
     <div className='max-w-fit flex justify-center items-end '>
       <span className='text-base'>R$</span>
       <input
+        data-testid={data_testid}
         onChange={ev => handleInput(ev)}
         value={input_value}
         className='bg-transparent outline-none text-5xl border-b-4 w-3/4 text-center'

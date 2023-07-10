@@ -25,7 +25,7 @@ export const HomePage = () => {
         </p>
         <Button
           onClick={() => navigate('/cadastro')}
-          testId='goToRegisterButton'
+          data_testid='goToRegisterButton'
         >
           Crie sua conta agora!
         </Button>

@@ -1,11 +1,16 @@
 import { Form } from 'components/form';
+import { FormValidator } from 'models/form_validator';
 import { useState } from 'react';
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState('');
+  const [email_message, setEmailMessage] = useState('');
   const [password, setPassword] = useState('');
+  const [password_message, setPasswordMessage] = useState('');
   const [name, setName] = useState('');
+  const [name_message, setNameMessage] = useState('');
   const [birth_date, setBirthDate] = useState('');
+  const [birth_date_message, setBirthDateMessage] = useState('');
 
   const inputs: IInputInfo[] = [
     {
@@ -17,6 +22,7 @@ export const RegisterPage = () => {
       value: email,
       type: 'email',
       placeholder: 'email@exemplo.com',
+      error_message: email_message,
     },
     {
       id: 2,
@@ -27,6 +33,7 @@ export const RegisterPage = () => {
       value: name,
       type: 'text',
       placeholder: 'nome de exemplo',
+      error_message: name_message,
     },
     {
       id: 3,
@@ -37,6 +44,7 @@ export const RegisterPage = () => {
       value: password,
       type: 'password',
       placeholder: '********',
+      error_message: password_message,
     },
     {
       id: 4,
@@ -47,12 +55,49 @@ export const RegisterPage = () => {
       value: birth_date,
       type: 'date',
       placeholder: 'dd/mm/yyyy',
+      error_message: birth_date_message,
     },
   ];
 
+  const isInputsValid = () => {
+    if (
+      !FormValidator.isEmailValid(email) ||
+      !FormValidator.isPasswordValid(password)
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  const displayInputsMessagesAndClear = () => {
+    if (!FormValidator.isEmailValid(email)) {
+      setEmailMessage('Insira um email valido!');
+      setEmail('');
+    }
+    if (!FormValidator.isPasswordValid(password)) {
+      setPasswordMessage(
+        'A senha é invalida! certifique-se que ela contem numeros, letras maiúsculas e minúsculas'
+      );
+      setPassword('');
+    }
+    if (!FormValidator.isPasswordValid(password)) {
+      setNameMessage(
+        'O nome é invalido! Lembre-se que são permitidos apenas letras nesse campo!'
+      );
+      setName('');
+    }
+    if (!FormValidator.isPasswordValid(password)) {
+      setBirthDateMessage(
+        'A data de nascimento é invalida! apenas maiores de idade são permitidos'
+      );
+      setBirthDate('');
+    }
+  };
+
   const onSubmit = () => {
-    console.log(email);
-    console.log(password);
+    if (!isInputsValid()) {
+      displayInputsMessagesAndClear();
+    }
   };
 
   return (

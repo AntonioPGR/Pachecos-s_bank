@@ -14,5 +14,6 @@ declare interface IInputInfo{
   label: string,
   placeholder?: string,
   id: number,
-  onChange(value:any): void
+  onChange(value: any): void,
+  error_message?: string
 }

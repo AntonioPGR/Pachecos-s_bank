@@ -35,6 +35,7 @@ export const Form = ({
                   {inputInfo.label}
                 </label>
                 <input
+                  data-testid={inputInfo.label + '_input'}
                   type={inputInfo.type}
                   value={inputInfo.value}
                   onChange={value => inputInfo.onChange(value.target.value)}
@@ -42,6 +43,11 @@ export const Form = ({
                   name={inputInfo.label}
                   className='block w-full px-4 py-2 rounded-2xl text-cinza-100 dark:text-cinza-900 bg-rosa-100 dark:bg-cinza-100 outline-none'
                 />
+                {inputInfo.error_message && (
+                  <p data-testid='form_error_message'>
+                    {inputInfo.error_message}
+                  </p>
+                )}
               </div>
             );
           })}
@@ -51,7 +57,7 @@ export const Form = ({
             <Link to={message_link.to}>{message_link.label}</Link>
           </p>
         )}
-        <Button testId='form_button'>{button_label}</Button>
+        <Button data_testid='form_button'>{button_label}</Button>
       </form>
     </section>
   );

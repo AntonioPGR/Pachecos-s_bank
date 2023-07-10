@@ -1,19 +1,29 @@
 // COMPONENTS
-import { ActionCard } from 'components/action_card';
+import { MoneyCard } from 'components/action_card';
 import { Balance } from 'components/balance';
 import { Statement } from 'components/statement';
+// REACT
 import { useState } from 'react';
 
 export const AccountPage = () => {
   const [deposit_value, setDepositValue] = useState(0);
-  const [statement_value, setWithdrawValue] = useState(0);
-
+  const [deposit_message, setDepositMessage] = useState('');
   const handleDeposit = () => {
-    return;
+    if (deposit_value <= 0) {
+      setDepositMessage(
+        'O valor desejado de depósito é invalido! Insira um valor maior que 0'
+      );
+    }
   };
 
+  const [withdraw_value, setWithdrawValue] = useState(0);
+  const [withdraw_message, setWithdrawMessage] = useState('');
   const handleWithdraw = () => {
-    return;
+    if (withdraw_value <= 0) {
+      setWithdrawMessage(
+        'O valor desejado de saque é invalido! Insira um valor maior que 0'
+      );
+    }
   };
 
   return (
@@ -22,21 +32,23 @@ export const AccountPage = () => {
       className='page_main grid grid-cols-3 grid-rows-2 gap-4'
     >
       <Balance className='col-start-1 col-end-3 row-start-1 row-end-1' />
-      <ActionCard
-        title='Depositar'
+      <MoneyCard
+        title='depositar'
         button_text='confirmar deposito'
         className='col-start-1 col-end-2 row-start-2 row-end-2'
         input_value={deposit_value}
         onChangeValue={setDepositValue}
         onSubmit={handleDeposit}
+        error_message={deposit_message}
       />
-      <ActionCard
-        title='Sacar'
+      <MoneyCard
+        title='sacar'
         button_text='confirmar saque'
         className='col-start-2 col-end-3 row-start-2 row-end-2'
-        input_value={statement_value}
+        input_value={withdraw_value}
         onChangeValue={setWithdrawValue}
         onSubmit={handleWithdraw}
+        error_message={withdraw_message}
       />
       <Statement className='col-start-3 col-end-3 row-start-1 row-end-3' />
     </main>

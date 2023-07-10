@@ -9,14 +9,16 @@ interface ActionCardProps {
   input_value: number;
   onChangeValue(n: number): void;
   onSubmit: () => void;
+  error_message?: string;
 }
-export const ActionCard = ({
+export const MoneyCard = ({
   className,
   title,
   button_text,
   input_value,
   onChangeValue,
   onSubmit,
+  error_message,
 }: ActionCardProps) => {
   return (
     <Card
@@ -25,8 +27,19 @@ export const ActionCard = ({
       }
     >
       <h2 className='text-4xl'> {title} </h2>
-      <MoneyInput onChange={onChangeValue} value={input_value} />
-      <Button onClick={onSubmit}> {button_text} </Button>
+      <MoneyInput
+        data_testid={title + '_input'}
+        onChange={onChangeValue}
+        value={input_value}
+      />
+      {error_message && (
+        <p className='text-center' data-testid={`${title}_error_message`}>
+          {error_message}
+        </p>
+      )}
+      <Button data_testid={title + '_button'} onClick={onSubmit}>
+        {button_text}
+      </Button>
     </Card>
   );
 };
