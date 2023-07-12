@@ -27,11 +27,26 @@ class TestRegisterView(TestSetUp):
   test_email = "teste@gmail.com"
   test_name = "nome de teste"
   test_password = "123"
-  test_birth_date = datetime(2006, 5, 4).date()
+  test_birth_date = datetime(2006, 4, 5).date()
   
   def test_user_can_register(self):
+    print(self.test_birth_date)
     res = self.client.post(self.urls['register'], {
       "email": self.test_email,
+      "password": self.test_password,
+      'name': self.test_name,
+      "birth_date": self.test_birth_date
+    })
+    self.assertEqual(res.status_code, 201)
+    
+    user = CustomUser.objects.filter(email=self.test_email)
+    user_exists = user.exists()
+    self.assertTrue(user_exists)
+    
+  def test_user_can_register_with_wrong_email(self):
+    print(self.test_birth_date)
+    res = self.client.post(self.urls['register'], {
+      "email": 'a',
       "password": self.test_password,
       'name': self.test_name,
       "birth_date": self.test_birth_date
@@ -45,5 +60,5 @@ class TestRegisterView(TestSetUp):
   def test_user_can_register_without_data(self):
     res = self.client.post(self.urls['register'], {})
     self.assertEqual(res.status_code, 400)
-    
+  
     

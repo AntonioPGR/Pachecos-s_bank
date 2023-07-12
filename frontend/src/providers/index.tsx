@@ -1,16 +1,22 @@
 import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
+import { ReactRouterProvider } from './react_router';
+import { RecoilProvider } from './recoil';
+import { ReactQueryProvider } from './react_query';
+import axios from 'axios';
 
-interface PropsProvider {
-  children: TChildren;
-}
-export const Providers = ({ children }: PropsProvider) => {
+axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+axios.defaults.headers.post = {
+  'Content-Type': 'application/json',
+};
+
+export const Providers = ({ children }: IProvider) => {
   return (
     <StrictMode>
-      <BrowserRouter>
-        <RecoilRoot>{children}</RecoilRoot>
-      </BrowserRouter>
+      <ReactRouterProvider>
+        <RecoilProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </RecoilProvider>
+      </ReactRouterProvider>
     </StrictMode>
   );
 };

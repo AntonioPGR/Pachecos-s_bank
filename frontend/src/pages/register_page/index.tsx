@@ -1,6 +1,8 @@
+import { registerNewUser } from 'api/register';
 import { Form } from 'components/form';
 import { FormValidator } from 'models/form_validator';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +13,9 @@ export const RegisterPage = () => {
   const [name_message, setNameMessage] = useState('');
   const [birth_date, setBirthDate] = useState('');
   const [birth_date_message, setBirthDateMessage] = useState('');
+
+  const [form_error, setFormError] = useState<undefined | string>('');
+  const navigate = useNavigate();
 
   const inputs: IInputInfo[] = [
     {
@@ -59,6 +64,13 @@ export const RegisterPage = () => {
     },
   ];
 
+  const clearInputMessages = () => {
+    setEmailMessage('');
+    setPasswordMessage('');
+    setNameMessage('');
+    setBirthDateMessage('');
+  };
+
   const isInputsValid = () => {
     if (
       !FormValidator.isEmailValid(email) ||
@@ -80,13 +92,13 @@ export const RegisterPage = () => {
       );
       setPassword('');
     }
-    if (!FormValidator.isPasswordValid(password)) {
+    if (!FormValidator.isNameValid(name)) {
       setNameMessage(
         'O nome é invalido! Lembre-se que são permitidos apenas letras nesse campo!'
       );
       setName('');
     }
-    if (!FormValidator.isPasswordValid(password)) {
+    if (!FormValidator.isBirthDateValid(birth_date)) {
       setBirthDateMessage(
         'A data de nascimento é invalida! apenas maiores de idade são permitidos'
       );
@@ -95,9 +107,21 @@ export const RegisterPage = () => {
   };
 
   const onSubmit = () => {
+    clearInputMessages();
     if (!isInputsValid()) {
       displayInputsMessagesAndClear();
+      return;
     }
+    registerNewUser(
+      {
+        birth_date,
+        email,
+        name,
+        password,
+      },
+      () => navigate(`/login?email=${email}&redirect_reason=user_created`),
+      e => setFormError(e)
+    );
   };
 
   return (
@@ -115,6 +139,7 @@ export const RegisterPage = () => {
           label: 'Já possui conta? entre aqui!',
           to: '/login',
         }}
+        form_error={form_error}
       />
     </main>
   );

@@ -28,3 +28,12 @@ class HttpResponses:
   @staticmethod
   def paymentRequired402(data:dict):
     return HttpResponses.toRespond(data, 402)
+  
+  @staticmethod
+  def conflict409(data:dict):
+    return HttpResponses.toRespond(data, 409)
+  
+  @staticmethod
+  def unprocessableEntity422(data:dict):
+    return HttpResponses.toRespond(data, 422)
+    

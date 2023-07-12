@@ -17,3 +17,22 @@ declare interface IInputInfo{
   onChange(value: any): void,
   error_message?: string
 }
+
+declare interface IProvider{
+  children: TChildren
+}
+
+declare interface IUserInfo{
+  email: string;
+  password: string;
+}
+
+declare interface ICompleteUserInfo extends IUserInfo{
+  birth_date: string;
+  name: string;
+}
+
+declare interface IRequestHeaders{
+  'Content-type'?: string,
+  'Authorization'?: string
+}

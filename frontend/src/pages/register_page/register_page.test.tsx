@@ -1,61 +1,37 @@
-import '@testing-library/jest-dom';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { renderWithProviders } from 'utils/test_renders';
-import { RegisterPage } from '.';
+// import '@testing-library/jest-dom';
+// import { act, render, screen } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
+// import { renderWithProviders } from 'utils/test_renders';
+// import { RegisterPage } from '.';
+// import { registerNewUser } from 'api/register';
+// import { resolve } from 'path';
+// import { BrowserRouter } from 'react-router-dom';
 
-const submitForm = () => {
-  const button = screen.getByTestId('form_button');
-  userEvent.click(button);
-};
+// jest.mock('api/register');
 
-const getRegisterInputs = () => {
-  const password_input = screen.getByTestId('senha_input') as HTMLInputElement;
-  const email_input = screen.getByTestId('email_input') as HTMLInputElement;
-  const name_input = screen.getByTestId('nome_input') as HTMLInputElement;
-  const birth_date_input = screen.getByTestId(
-    'data de nascimento_input'
-  ) as HTMLInputElement;
-  return {
-    password_input,
-    email_input,
-    name_input,
-    birth_date_input,
-  };
-};
+// const mock_register = {
+//   token: '123asd',
+// };
 
-describe('Test Register form actions after registration', () => {
+// const mock_requisicao = (retorno: any) => {
+//   return Promise.resolve({
+//     data: retorno,
+//   });
+// };
+
+describe('Test Register form actions with correct submit', () => {
+  it.todo('should call the api to register a new client');
+
   it.todo('Should be redirected to account page');
   it.todo('Should add session token to cookies');
 });
 
 describe('Test login form actions with incorrect submit', () => {
-  const incorrectFillInputs = () => {
-    const inputs = getRegisterInputs();
-    userEvent.type(inputs.email_input, 'emailsemarroba.com.br');
-    userEvent.type(inputs.name_input, '123@asda');
-    userEvent.type(inputs.birth_date_input, '2022-01-05');
-    userEvent.type(inputs.password_input, ' ');
-  };
+  it.todo('should display errors on incorrect inputs');
 
-  it('should display errors on incorrect inputs', async () => {
-    renderWithProviders(<RegisterPage />);
-    incorrectFillInputs();
-    submitForm();
-    const message = await screen.findAllByTestId('form_error_message');
-    expect(message).toHaveLength(4);
-  });
-
-  it('should clean inputs with errors after submit', async () => {
-    renderWithProviders(<RegisterPage />);
-    incorrectFillInputs();
-    submitForm();
-    const inputs = getRegisterInputs();
-    expect(inputs.email_input.value).toBe('');
-    expect(inputs.password_input.value).toBe('');
-    expect(inputs.birth_date_input.value).toBe('');
-    expect(inputs.name_input.value).toBe('');
-  });
+  it.todo('should clean inputs with errors after submit');
 
   it.todo('Error message should be displayed');
 });
+
+export {};

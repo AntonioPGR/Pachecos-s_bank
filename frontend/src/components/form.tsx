@@ -7,6 +7,7 @@ interface IFormProps {
   title: string;
   button_label: string;
   message_link?: ILink;
+  form_error?: string;
 }
 export const Form = ({
   inputs,
@@ -14,6 +15,7 @@ export const Form = ({
   title,
   button_label,
   message_link,
+  form_error,
 }: IFormProps) => {
   const handleSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
@@ -25,6 +27,9 @@ export const Form = ({
       <h1 className='font-highlight text-rosa-100 text-5xl'> {title} </h1>
       <form onSubmit={ev => handleSubmit(ev)}>
         <section className='my-12 flex flex-col gap-4'>
+          {form_error && (
+            <p className='text-red-700 mt-1 text-sm'> {form_error} </p>
+          )}
           {inputs.map(inputInfo => {
             return (
               <div key={inputInfo.id}>
@@ -35,7 +40,9 @@ export const Form = ({
                   {inputInfo.label}
                 </label>
                 <input
+                  required
                   data-testid={inputInfo.label + '_input'}
+                  autoComplete='on'
                   type={inputInfo.type}
                   value={inputInfo.value}
                   onChange={value => inputInfo.onChange(value.target.value)}
@@ -44,7 +51,10 @@ export const Form = ({
                   className='block w-full px-4 py-2 rounded-2xl text-cinza-100 dark:text-cinza-900 bg-rosa-100 dark:bg-cinza-100 outline-none'
                 />
                 {inputInfo.error_message && (
-                  <p data-testid='form_error_message'>
+                  <p
+                    className='text-red-700 mt-1 text-sm'
+                    data-testid='form_error_message'
+                  >
                     {inputInfo.error_message}
                   </p>
                 )}
