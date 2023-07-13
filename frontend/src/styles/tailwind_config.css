@@ -15,7 +15,7 @@
 }
 
 .page_main{
-  @apply m-auto min-h-screen p-4 max-w-screen-xl w-full page_text
+  @apply m-auto h-screen p-4 max-w-screen-xl w-full page_text
 }
 
 .page_redirect_link{

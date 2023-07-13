@@ -2,8 +2,10 @@
 import { MoneyCard } from 'components/action_card';
 import { Balance } from 'components/balance';
 import { Statement } from 'components/statement';
+import { SessionKey } from 'models/session_key';
 // REACT
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const AccountPage = () => {
   const [deposit_value, setDepositValue] = useState(0);
@@ -15,7 +17,6 @@ export const AccountPage = () => {
       );
     }
   };
-
   const [withdraw_value, setWithdrawValue] = useState(0);
   const [withdraw_message, setWithdrawMessage] = useState('');
   const handleWithdraw = () => {
@@ -25,6 +26,11 @@ export const AccountPage = () => {
       );
     }
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!SessionKey.is_set()) navigate('/unauthorized');
+  });
 
   return (
     <main

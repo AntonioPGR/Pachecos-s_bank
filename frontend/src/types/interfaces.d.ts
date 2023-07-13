@@ -1,10 +1,13 @@
 declare interface ILink{
-  id: number,
   to: string,
   label: string,
 }
 
-declare interface IMenuLink extends ILink{
+declare interface ILinkWithId extends ILink{
+  id: number
+}
+
+declare interface IMenuLink extends ILinkWithId{
   icon: React.ForwardRefExoticComponent
 }
 

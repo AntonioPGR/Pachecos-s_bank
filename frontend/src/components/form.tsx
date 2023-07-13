@@ -6,7 +6,7 @@ interface IFormProps {
   onSubmit(): void;
   title: string;
   button_label: string;
-  message_link?: ILink;
+  message_link?: ILinkWithId;
   error_message?: string;
   success_message?: string;
 }
@@ -31,8 +31,7 @@ export const Form = ({
         <section className='my-8 flex flex-col gap-4'>
           {success_message && (
             <p className='text-green-700 text-md p-2 bg-green-100 rounded-md'>
-              {' '}
-              {success_message}{' '}
+              {success_message}
             </p>
           )}
           {error_message && (

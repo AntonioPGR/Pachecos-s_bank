@@ -7,6 +7,7 @@ import { InvestmentsPage } from 'pages/investments_page';
 import { LoginPage } from 'pages/login_page';
 import { NotFoundPage } from 'pages/not_found_page';
 import { RegisterPage } from 'pages/register_page';
+import { UnauthorizedPage } from 'pages/unauthorized_page';
 // ROUTER
 import { Route, Routes } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ export const AppRouter = () => {
           <Route path='/cadastro' element={<RegisterPage />} />
           <Route path='/conta' element={<AccountPage />} />
           <Route path='/investimentos' element={<InvestmentsPage />} />
+          <Route path='/unauthorized' element={<UnauthorizedPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </section>
