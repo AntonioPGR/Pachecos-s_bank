@@ -139,7 +139,7 @@ export const RegisterPage = () => {
           label: 'Já possui conta? entre aqui!',
           to: '/login',
         }}
-        form_error={form_error}
+        error_message={form_error}
       />
     </main>
   );

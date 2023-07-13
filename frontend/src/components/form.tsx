@@ -7,7 +7,8 @@ interface IFormProps {
   title: string;
   button_label: string;
   message_link?: ILink;
-  form_error?: string;
+  error_message?: string;
+  success_message?: string;
 }
 export const Form = ({
   inputs,
@@ -15,7 +16,8 @@ export const Form = ({
   title,
   button_label,
   message_link,
-  form_error,
+  error_message,
+  success_message,
 }: IFormProps) => {
   const handleSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
@@ -26,9 +28,17 @@ export const Form = ({
     <section className='p-4 border-solid border-rosa-100 border-x-2 max-w-2xl w-full'>
       <h1 className='font-highlight text-rosa-100 text-5xl'> {title} </h1>
       <form onSubmit={ev => handleSubmit(ev)}>
-        <section className='my-12 flex flex-col gap-4'>
-          {form_error && (
-            <p className='text-red-700 mt-1 text-sm'> {form_error} </p>
+        <section className='my-8 flex flex-col gap-4'>
+          {success_message && (
+            <p className='text-green-700 text-md p-2 bg-green-100 rounded-md'>
+              {' '}
+              {success_message}{' '}
+            </p>
+          )}
+          {error_message && (
+            <p className='text-red-700 p-2 bg-red-100 rounded-md text-md'>
+              {error_message}
+            </p>
           )}
           {inputs.map(inputInfo => {
             return (

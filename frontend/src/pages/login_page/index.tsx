@@ -1,12 +1,19 @@
+import { loginNewUser } from 'api/login';
 import { Form } from 'components/form';
 import { FormValidator } from 'models/form_validator';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [email_message, setEmailMessage] = useState('');
   const [password, setPassword] = useState('');
   const [password_message, setPasswordMessage] = useState('');
+  const [success_message, setSuccessMessage] = useState('');
+  const [error_message, setErrorMessage] = useState<string | undefined>('');
+
+  const [search_params] = useSearchParams();
+  const navigate = useNavigate();
 
   const inputs: IInputInfo[] = [
     {
@@ -59,10 +66,30 @@ export const LoginPage = () => {
   };
 
   const onSubmit = () => {
+    setSuccessMessage('');
+    setErrorMessage('');
     if (!isInputsValid()) {
       displayInputsMessagesAndClear();
+      return;
     }
+    loginNewUser(
+      { email, password },
+      () => navigate('/conta'),
+      e => setErrorMessage(e)
+    );
   };
+
+  useEffect(() => {
+    const url_email = search_params.get('email');
+    const url_reason = search_params.get('redirect_reason');
+
+    if (url_email) {
+      setEmail(url_email);
+    }
+    if (url_reason === 'user_created') {
+      setSuccessMessage('Usuário criado com sucesso! Faça o login agora!');
+    }
+  }, []);
 
   return (
     <main
@@ -79,6 +106,8 @@ export const LoginPage = () => {
           label: 'Ainda não possui conta? registre-se aqui!',
           to: '/cadastro',
         }}
+        success_message={success_message}
+        error_message={error_message}
       />
     </main>
   );

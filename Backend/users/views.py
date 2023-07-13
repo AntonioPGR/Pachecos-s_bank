@@ -34,6 +34,12 @@ class UserLoginView(BaseAPIView):
       return self.http_responses.unprocessableEntity422({"msg": "O email é invalido. Verifique a digitação e tente novamente!"})
     
     except Exception as e:
+      error_message = e.args[0]
+      if isinstance(error_message, dict):
+        keys = list(error_message)
+        error_message = error_message[keys[0]]
+      if isinstance(error_message, list):
+        error_message = error_message[0]
       return self.http_responses.badRequest400({"msg": e.args})
     
     else:
