@@ -39,3 +39,9 @@ declare interface IRequestHeaders{
   'Content-type'?: string,
   'Authorization'?: string
 }
+
+declare interface IStatement{
+  description: string,
+  id: number,
+  value: number
+}

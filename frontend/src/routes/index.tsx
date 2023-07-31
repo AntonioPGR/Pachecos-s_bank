@@ -5,6 +5,7 @@ import { AccountPage } from 'pages/account_page';
 import { HomePage } from 'pages/home_page';
 import { InvestmentsPage } from 'pages/investments_page';
 import { LoginPage } from 'pages/login_page';
+import { LogoutPage } from 'pages/logout_page';
 import { NotFoundPage } from 'pages/not_found_page';
 import { RegisterPage } from 'pages/register_page';
 import { UnauthorizedPage } from 'pages/unauthorized_page';
@@ -23,6 +24,7 @@ export const AppRouter = () => {
           <Route path='/conta' element={<AccountPage />} />
           <Route path='/investimentos' element={<InvestmentsPage />} />
           <Route path='/unauthorized' element={<UnauthorizedPage />} />
+          <Route path='/logout' element={<LogoutPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </section>

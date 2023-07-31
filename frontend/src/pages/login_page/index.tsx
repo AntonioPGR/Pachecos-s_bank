@@ -3,6 +3,7 @@ import { Form } from 'components/form';
 import { FormValidator } from 'models/form_validator';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { getSetterAsLoggedIn } from 'recoil/state_is_logged_in';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ export const LoginPage = () => {
 
   const [search_params] = useSearchParams();
   const navigate = useNavigate();
+  const setAsLoggedIn = getSetterAsLoggedIn();
 
   const inputs: IInputInfo[] = [
     {
@@ -50,31 +52,39 @@ export const LoginPage = () => {
     return true;
   };
 
-  const displayInputsMessagesAndClear = () => {
+  const displayInputsMessages = () => {
     if (!FormValidator.isEmailValid(email)) {
       setEmailMessage(
         'O email é invalido, verifique o campo e corrija os dados!'
       );
-      setEmail('');
     }
     if (!FormValidator.isPasswordValid(password)) {
       setPasswordMessage(
         'A senha é invalida! certifique-se que ela contem numeros, letras maiúsculas e minúsculas'
       );
-      setPassword('');
     }
+  };
+
+  const cleanForm = () => {
+    setPassword('');
+    setEmail('');
   };
 
   const onSubmit = () => {
     setSuccessMessage('');
     setErrorMessage('');
     if (!isInputsValid()) {
-      displayInputsMessagesAndClear();
+      displayInputsMessages();
+      cleanForm();
       return;
     }
+    cleanForm();
     loginNewUser(
       { email, password },
-      () => navigate('/conta'),
+      () => {
+        setAsLoggedIn();
+        navigate('/conta');
+      },
       e => setErrorMessage(e)
     );
   };

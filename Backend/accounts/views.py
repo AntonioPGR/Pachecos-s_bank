@@ -14,5 +14,5 @@ class AccountView(BaseAPIView):
     except:
       return self.http_responses.internal500("Algum erro inesperado ocorreu ao tentar retornar seu saldo! [requests_handler/views -> AccountView.get]")
     else:
-      return self.http_responses.ok200({ "value": balance})
+      return self.http_responses.ok200({"balance": balance})
   

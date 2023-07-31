@@ -81,37 +81,42 @@ export const RegisterPage = () => {
     return true;
   };
 
-  const displayInputsMessagesAndClear = () => {
+  const displayInputsMessages = () => {
     if (!FormValidator.isEmailValid(email)) {
       setEmailMessage('Insira um email valido!');
-      setEmail('');
     }
     if (!FormValidator.isPasswordValid(password)) {
       setPasswordMessage(
         'A senha é invalida! certifique-se que ela contem numeros, letras maiúsculas e minúsculas'
       );
-      setPassword('');
     }
     if (!FormValidator.isNameValid(name)) {
       setNameMessage(
         'O nome é invalido! Lembre-se que são permitidos apenas letras nesse campo!'
       );
-      setName('');
     }
     if (!FormValidator.isBirthDateValid(birth_date)) {
       setBirthDateMessage(
         'A data de nascimento é invalida! apenas maiores de idade são permitidos'
       );
-      setBirthDate('');
     }
+  };
+
+  const cleanForm = () => {
+    setName('');
+    setPassword('');
+    setEmail('');
+    setBirthDate('');
   };
 
   const onSubmit = () => {
     clearInputMessages();
     if (!isInputsValid()) {
-      displayInputsMessagesAndClear();
+      displayInputsMessages();
+      cleanForm();
       return;
     }
+    cleanForm();
     registerNewUser(
       {
         birth_date,
