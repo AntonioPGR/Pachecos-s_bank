@@ -2,7 +2,6 @@ import { getAPIStatements } from "api/statement";
 import { AxiosError } from "axios";
 import { atom, useSetRecoilState } from "recoil";
 
-
 export const state_statements = atom<TApiAtom<IStatement[], AxiosError>>({
   key: 'state_statements',
   default: undefined

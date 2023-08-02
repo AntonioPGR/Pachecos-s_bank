@@ -7,8 +7,17 @@ import { SessionKey } from 'models/session_key';
 // REACT
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getBalance } from 'recoil/state_balance';
+import { getStatements } from 'recoil/state_statement';
 
 export const AccountPage = () => {
+  const update_statement = getStatements();
+  const update_balance = getBalance();
+  const update_data = () => {
+    update_balance();
+    update_statement();
+  };
+
   const [deposit_value, setDepositValue] = useState(0);
   const [deposit_message, setDepositMessage] = useState('');
   const handleDeposit = () => {
@@ -17,8 +26,11 @@ export const AccountPage = () => {
         'O valor desejado de depósito é invalido! Insira um valor maior que 0'
       );
     }
-    makeAStatement(deposit_value);
+    makeAStatement({ description: '', value: deposit_value, id: 1 }).then(
+      update_data
+    );
   };
+
   const [withdraw_value, setWithdrawValue] = useState(0);
   const [withdraw_message, setWithdrawMessage] = useState('');
   const handleWithdraw = () => {
@@ -27,7 +39,10 @@ export const AccountPage = () => {
         'O valor desejado de saque é invalido! Insira um valor maior que 0'
       );
     }
-    makeAStatement(-withdraw_value);
+    makeAStatement({ description: '', value: -withdraw_value, id: 1 }).then(
+      update_data
+    );
+    setDepositValue(0);
   };
 
   const navigate = useNavigate();

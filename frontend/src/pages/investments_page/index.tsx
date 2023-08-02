@@ -4,10 +4,12 @@ import { InvestedValue } from 'components/invested_value';
 import { SessionKey } from 'models/session_key';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getInvestments } from 'recoil/state_investments';
 
 export const InvestmentsPage = () => {
   const [new_investment_value, setNewInvestmentValue] = useState(0);
   const [investment_input_message, setInvestmentInputMessage] = useState('');
+  const update_investments = getInvestments();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +22,7 @@ export const InvestmentsPage = () => {
         'O valor investido não pode ser menor ou igual a 0!'
       );
     }
-    addToInvestments(new_investment_value);
+    addToInvestments(new_investment_value).then(update_investments);
   };
 
   return (

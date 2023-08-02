@@ -12,10 +12,10 @@ export const getBalance = () => {
   return async () => {
     try {
       const balance_value = await getAPIBalance()
-      return set_balance(balance_value)
+      set_balance(balance_value)
     } catch (e) {
       if (e instanceof AxiosError) {
-        return set_balance(e);
+        set_balance(e);
       }
     }
   }

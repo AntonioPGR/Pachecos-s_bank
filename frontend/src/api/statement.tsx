@@ -16,13 +16,13 @@ export const getAPIStatements = async () => {
   }
 };
 
-export const makeAStatement = (value: number, description?: string) => {
+export const makeAStatement = (statment: IStatement) => {
   return axios
     .post(
       'statements/',
       {
-        value,
-        description: description ?? '',
+        value: statment.value,
+        description: statment.description,
       },
       {
         headers: {
