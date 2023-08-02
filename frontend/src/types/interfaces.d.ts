@@ -45,3 +45,18 @@ declare interface IStatement{
   id: number,
   value: number
 }
+
+declare interface IInvestment{
+  current_value: number,
+  invested_value: number
+}
+
+declare interface IBalance{
+  balance: number
+}
+
+
+declare interface IAPIError{
+  message: string
+  status: number | undefined
+}

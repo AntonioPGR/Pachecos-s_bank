@@ -1,4 +1,5 @@
 // COMPONENTS
+import { makeAStatement } from 'api/statement';
 import { MoneyCard } from 'components/action_card';
 import { Balance } from 'components/balance';
 import { Statement } from 'components/statement';
@@ -16,6 +17,7 @@ export const AccountPage = () => {
         'O valor desejado de depósito é invalido! Insira um valor maior que 0'
       );
     }
+    makeAStatement(deposit_value);
   };
   const [withdraw_value, setWithdrawValue] = useState(0);
   const [withdraw_message, setWithdrawMessage] = useState('');
@@ -25,6 +27,7 @@ export const AccountPage = () => {
         'O valor desejado de saque é invalido! Insira um valor maior que 0'
       );
     }
+    makeAStatement(-withdraw_value);
   };
 
   const navigate = useNavigate();

@@ -1,31 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { Card } from '../card';
 import {
   ArrowTrendingDownIcon,
   ArrowTrendingUpIcon,
 } from '@heroicons/react/24/solid';
-import { getStatements } from 'api/statement';
-import { useEffect } from 'react';
 import { brl_formatter } from 'models/money_formatter';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { getStatements, state_statements } from 'recoil/state_statement';
 
 interface StatementProps {
   className?: string;
 }
 export const Statement = ({ className }: StatementProps) => {
-  const { isLoading, isError, data } = useQuery({
-    queryKey: ['getStatements'],
-    queryFn: getStatements,
-    retry: 2,
-  });
+  const statements_list = useRecoilValue(state_statements);
+  const loadStatements = getStatements();
+
+  useEffect(() => {
+    loadStatements();
+  }, []);
 
   const renderStatements = () => {
-    if (isLoading) {
+    if (!statements_list) {
       return <p>loading</p>;
     }
-    if (isError) {
+    if (statements_list instanceof AxiosError) {
       return <p>error</p>;
     }
-    return data.map(value => {
+    return statements_list.map(value => {
       return (
         <li key={value.id}>
           <div
@@ -38,7 +40,7 @@ export const Statement = ({ className }: StatementProps) => {
               <ArrowTrendingUpIcon className='w-8 ' />
             ) : (
               <ArrowTrendingDownIcon className='w-8 ' />
-            )}{' '}
+            )}
             <span className='text-xl'>{brl_formatter.format(value.value)}</span>
           </div>
           {value.description && (

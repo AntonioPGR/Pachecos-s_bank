@@ -1,9 +1,9 @@
 import axios, { AxiosError } from 'axios';
 import { SessionKey } from 'models/session_key';
 
-export const getAPIStatements = async () => {
+export const getAPIInvesmentsValue = async () => {
   try {
-    const res = await axios.get<IStatement[]>('statements/', {
+    const res = await axios.get<IInvestment>('investments/', {
       headers: {
         Authorization: `Token ` + SessionKey.get(),
       },
@@ -16,13 +16,12 @@ export const getAPIStatements = async () => {
   }
 };
 
-export const makeAStatement = (value: number, description?: string) => {
+export const addToInvestments = (value: number) => {
   return axios
     .post(
-      'statements/',
+      'investments/',
       {
         value,
-        description: description ?? '',
       },
       {
         headers: {

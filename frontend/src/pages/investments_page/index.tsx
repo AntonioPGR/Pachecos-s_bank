@@ -1,24 +1,27 @@
+import { addToInvestments } from 'api/investments';
 import { MoneyCard } from 'components/action_card';
 import { InvestedValue } from 'components/invested_value';
 import { SessionKey } from 'models/session_key';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const InvestmentsPage = () => {
-  const [investment_value, setInvestmentValue] = useState(0);
-  const [investment_message, setInvestmentMessage] = useState('');
-  const handleInvest = () => {
-    if (investment_value <= 0) {
-      setInvestmentMessage(
-        'O valor investido não pode ser menor ou igual a 0!'
-      );
-    }
-  };
+  const [new_investment_value, setNewInvestmentValue] = useState(0);
+  const [investment_input_message, setInvestmentInputMessage] = useState('');
 
   const navigate = useNavigate();
   useEffect(() => {
     if (!SessionKey.is_set()) navigate('/unauthorized');
   });
+
+  const handleInvest = () => {
+    if (new_investment_value <= 0) {
+      setInvestmentInputMessage(
+        'O valor investido não pode ser menor ou igual a 0!'
+      );
+    }
+    addToInvestments(new_investment_value);
+  };
 
   return (
     <main
@@ -27,13 +30,13 @@ export const InvestmentsPage = () => {
     >
       <InvestedValue className='row-start-1 row-end-2' />
       <MoneyCard
-        input_value={investment_value}
+        input_value={new_investment_value}
         button_text='Confirmar Investimento'
-        onChangeValue={setInvestmentValue}
+        onChangeValue={setNewInvestmentValue}
         onSubmit={handleInvest}
         title='investir'
         className='row-start-2 row-end-3'
-        error_message={investment_message}
+        error_message={investment_input_message}
       />
     </main>
   );

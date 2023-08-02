@@ -1,31 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
 import { Card } from 'components/card';
 import BalanceImage from 'images/balance_image.svg';
-import { getCurrentBalance } from 'api/balance';
 import { brl_formatter } from 'models/money_formatter';
+import { useRecoilValue } from 'recoil';
+import { getBalance, state_balance } from 'recoil/state_balance';
+import { useEffect } from 'react';
+import { AxiosError } from 'axios';
 
 interface BalanceProps {
   className?: string;
 }
 export const Balance = ({ className }: BalanceProps) => {
-  const {
-    isLoading,
-    data: balance,
-    isError,
-  } = useQuery({
-    queryKey: ['getBalance'],
-    queryFn: getCurrentBalance,
-  });
+  const balance = useRecoilValue(state_balance);
+  const loadBalance = getBalance();
+
+  useEffect(() => {
+    loadBalance();
+  }, []);
 
   const renderBalance = () => {
-    if (isLoading) {
+    if (!balance) {
       return <p className='text-5xl'> loading</p>;
     }
-    if (isError) {
+    if (balance instanceof AxiosError) {
       return <p className='text-5xl'> an error ocurred</p>;
     }
     return (
-      <p className='text-5xl'> {brl_formatter.format(balance as number)} </p>
+      <p className='text-5xl'> {brl_formatter.format(balance.balance)} </p>
     );
   };
 

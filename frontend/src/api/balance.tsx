@@ -1,14 +1,17 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { SessionKey } from 'models/session_key';
 
-export const getCurrentBalance = () => {
-  return axios
-    .get<{ balance: number }>('accounts/', {
+export const getAPIBalance = async () => {
+  try {
+    const res = await axios.get<IBalance>('accounts/', {
       headers: {
         Authorization: `Token ` + SessionKey.get(),
       },
-    })
-    .then(res => {
-      return res.data.balance;
     });
+    return res.data;
+  } catch (e) {
+    if ((e as Error).name === 'AxiosError') {
+      throw new AxiosError((e as AxiosError).message, (e as AxiosError).code);
+    }
+  }
 };
