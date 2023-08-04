@@ -27,7 +27,9 @@ export const Statement = ({ className }: StatementProps) => {
     if (statements_list instanceof AxiosError) {
       return <p>error</p>;
     }
-    return statements_list.map(value => {
+    const reversed_statements_list = [...statements_list];
+    reversed_statements_list.reverse();
+    return reversed_statements_list.map(value => {
       return (
         <li key={value.id}>
           <div
@@ -52,9 +54,15 @@ export const Statement = ({ className }: StatementProps) => {
   };
 
   return (
-    <Card className={className + ' dark:bg-cinza-900 bg-gray-500'}>
+    <Card
+      className={
+        className + ' flex flex-col gap-2 dark:bg-cinza-900 bg-gray-500 h-full'
+      }
+    >
       <h2 className='text-3xl mb-4'>Extrato</h2>
-      <ul className='flex flex-col gap-2'>{renderStatements()} </ul>
+      <ul className='flex flex-col gap-2 overflow-y-scroll h-full'>
+        {renderStatements()}
+      </ul>
     </Card>
   );
 };

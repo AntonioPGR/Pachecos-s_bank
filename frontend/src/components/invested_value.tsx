@@ -37,12 +37,12 @@ export const InvestedValue = ({ className }: InvestedValueProps) => {
     <Card
       className={
         className +
-        ' flex gap-4 p-8 justify-between dark:bg-rosa-200 bg-rosa-100'
+        ' flex gap-4 p-8 justify-between items-center dark:bg-rosa-200 bg-rosa-100'
       }
     >
-      <article className='flex flex-col justify-center gap-8'>
-        <h1 className='text-4xl'>Olá josé</h1>
-        <section className='flex gap-8'>
+      <article className='flex flex-col items-center max-lg:w-full justify-center gap-8'>
+        <h1 className='text-4xl w-full'>Olá josé!</h1>
+        <section className='flex flex-col items-center md:flex-row gap-8'>
           <div className='flex flex-col gap-2'>
             <p className='text-xl'>Seu valor total investido é:</p>
             {renderValue('invested')}
@@ -53,7 +53,7 @@ export const InvestedValue = ({ className }: InvestedValueProps) => {
           </div>
         </section>
       </article>
-      <div>
+      <div className='hidden lg:block'>
         <img
           src={InvestmentsImage}
           alt='A man sitting in a bar chart with investments icons and references in the backgroud'

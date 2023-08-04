@@ -23,21 +23,22 @@ export const InvestmentsPage = () => {
       );
     }
     addToInvestments(new_investment_value).then(update_investments);
+    setNewInvestmentValue(0);
   };
 
   return (
     <main
       data-testid='investmentsPage'
-      className='page_main grid grid-cols-1 grid-rows-2 gap-4'
+      className='page_main flex flex-col gap-4 h-full'
     >
-      <InvestedValue className='row-start-1 row-end-2' />
+      <InvestedValue className='h-full' />
       <MoneyCard
         input_value={new_investment_value}
         button_text='Confirmar Investimento'
         onChangeValue={setNewInvestmentValue}
         onSubmit={handleInvest}
         title='investir'
-        className='row-start-2 row-end-3'
+        className='h-full'
         error_message={investment_input_message}
       />
     </main>

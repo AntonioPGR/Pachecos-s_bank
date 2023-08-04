@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .page_button{
-  @apply uppercase text-rosa-100 bg-transparent border-2 py-2 px-4 border-solid border-rosa-100 rounded-2xl font-default text-2xl hover:bg-rosa-100 hover:text-cinza-100 duration-300
+  @apply max-sm:w-full uppercase text-rosa-100 bg-transparent border-2 py-2 px-4 border-solid border-rosa-100 rounded-2xl font-default text-2xl hover:bg-rosa-100 hover:text-cinza-100 duration-300
 }
 
 .page_text{
@@ -15,7 +15,7 @@
 }
 
 .page_main{
-  @apply m-auto h-screen p-4 max-w-screen-xl w-full page_text
+  @apply m-auto max-w-screen-xl page_text w-full
 }
 
 .page_redirect_link{

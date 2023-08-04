@@ -38,8 +38,8 @@ export const SideBar = () => {
   };
 
   return (
-    <nav className='fixed flex flex-col gap-8 group p-2 md:p-4 bg-azul-900 h-screen w-fit'>
-      <ul className='flex flex-col items-start gap-4'>
+    <nav className='flex max-sm:justify-between items-center group p-2 bg-azul-900 w-full sm:flex-col sm:gap-4 sm:fixed sm:h-screen sm:w-fit md:p-4'>
+      <nav className='flex sm:flex-col items-center sm:items-start gap-2 w-full'>
         <Link to={'/'}>
           <img
             src={Logo}
@@ -55,6 +55,9 @@ export const SideBar = () => {
           onClick={togglePageTheme}
           className='w-12 px-1 text-rosa-100 block dark:hidden cursor-pointer'
         />
+      </nav>
+
+      <ul className='flex sm:flex-col  items-center sm:items-start gap-2'>
         {getLinksToDisplay().map(value => (
           <Link key={value.id} to={value.to} className='hover:drop-shadow-lg'>
             <li

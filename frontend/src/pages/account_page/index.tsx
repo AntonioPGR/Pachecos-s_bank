@@ -29,6 +29,7 @@ export const AccountPage = () => {
     makeAStatement({ description: '', value: deposit_value, id: 1 }).then(
       update_data
     );
+    setDepositValue(0);
   };
 
   const [withdraw_value, setWithdrawValue] = useState(0);
@@ -42,7 +43,7 @@ export const AccountPage = () => {
     makeAStatement({ description: '', value: -withdraw_value, id: 1 }).then(
       update_data
     );
-    setDepositValue(0);
+    setWithdrawValue(0);
   };
 
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const AccountPage = () => {
   return (
     <main
       data-testid='accountPage'
-      className='page_main grid grid-cols-3 grid-rows-2 gap-4'
+      className='page_main h-full w-full flex flex-col gap-4 lg:grid lg:grid-cols-3 lg:grid-rows-2'
     >
       <Balance className='col-start-1 col-end-3 row-start-1 row-end-1' />
       <MoneyCard

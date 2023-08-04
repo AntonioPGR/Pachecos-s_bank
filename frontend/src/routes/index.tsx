@@ -14,9 +14,9 @@ import { Route, Routes } from 'react-router-dom';
 
 export const AppRouter = () => {
   return (
-    <div className='bg-gray-200 dark:bg-gray-800 grid grid-cols-[auto_1fr]'>
+    <div className='min-h-screen bg-gray-200 dark:bg-gray-800 flex flex-col sm:grid sm:grid-cols-[auto_1fr]'>
       <SideBar />
-      <section className='flex items-center justify-center w-screen min-h-screen pl-20'>
+      <section className='flex items-center justify-center w-[calc(100vw-1.032rem)] min-h-[calc(100vh-64px)] p-4 sm:pl-20 md:pl-24 sm:h-screen'>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
